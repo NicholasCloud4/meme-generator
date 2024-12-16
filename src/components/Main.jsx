@@ -2,12 +2,6 @@ import React, { useState } from "react"
 import style from "./Main.module.css"
 
 export default function Main() {
-    /**
-     * Challenge: move the hardcoded meme info into React
-     * state. Use an object with `topText`, `bottomText`,
-     * and `imageUrl` properties, and set the initial values to
-     * the ones hardcoded below.
-     */
 
     const [meme, setMeme] = useState({
         topText: "One does not simply",
@@ -16,18 +10,14 @@ export default function Main() {
     })
 
     function handleChange(event) {
+        const { value, name } = event.currentTarget
         setMeme((prevMeme) => {
             return {
                 ...prevMeme,
-                topText: event.target.value
+                [name]: value
+                //[event.target.name]: event.target.value
             }
         })
-        /**
-         * Challenge: update the topText value in the meme state
-         * object every time the topText input box is changed
-         * 
-         * Note: don't worry about bottomText at this point.
-         */
     }
 
     return (
@@ -39,6 +29,7 @@ export default function Main() {
                         placeholder="One does not simply"
                         name="topText"
                         onChange={handleChange}
+                        value={meme.topText}
                     />
                 </label>
 
@@ -47,6 +38,8 @@ export default function Main() {
                         type="text"
                         placeholder="Walk into Mordor"
                         name="bottomText"
+                        onChange={handleChange}
+                        value={meme.bottomText}
                     />
                 </label>
                 <button>Get a new meme image 🖼</button>
